@@ -1,0 +1,33 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: talison2005
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+  clients:
+    build: ./apps/clients/
+    command: sh -c "sleep 10 && yarn run start"
+    ports:
+      - "3030:3030"
+  courses:
+    build: ./apps/courses/
+    command: sh -c "sleep 10 && yarn run start"
+    ports:
+      - "4040:4040"
+  students:
+    build: ./apps/students/
+    command: sh -c "sleep 10 && yarn run start"
+    ports:
+      - "5050:5050"
+  teachers:
+    build: ./apps/teachers/
+    command: sh -c "sleep 10 && yarn run start"
+    ports:
+      - "6060:6060"
